@@ -373,13 +373,13 @@
                 <ul class="menu-sub">
                     <li class="menu-item">
                         <a href="<?= base_url('admin/delegate/') ?>" class="menu-link">
-                            <i class="fas fa-address-book menu-icon"></i>
+                            <i class="fas fa-users menu-icon"></i>
                             <div data-i8n=" View Delegates "> View Delegates </div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="<?= base_url('admin/delegate/visit_delegate') ?>" class="menu-link">
-                            <i class="far fa-eye-low-vision menu-icon"></i>
+                            <i class="far fa-address-book menu-icon"></i>
                             <div data-i8n=" Visit Delegate "> Visit Delegate </div>
                         </a>
                     </li>
