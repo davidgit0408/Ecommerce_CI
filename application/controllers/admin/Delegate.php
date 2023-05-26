@@ -10,7 +10,7 @@ class Delegate extends CI_Controller
         parent::__construct();
         $this->load->database();
         $this->load->helper(['url', 'language', 'timezone_helper']);
-        $this->load->model(['Customer_model', 'address_model']);
+        $this->load->model(['Customer_model', 'address_model', 'Order_model']);
     }
 
     public function index()
@@ -83,6 +83,23 @@ class Delegate extends CI_Controller
             $this->response['csrfHash'] = $this->security->get_csrf_hash();
             print_r(json_encode($this->response));
             return false;
+        }
+    }
+
+    public function visit_delegate()
+    {
+
+        if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
+            $this->data['main_page'] = TABLES . 'visit-delegate';
+            $settings = get_settings('system_settings', true);
+            $this->data['title'] = 'Visit Delegate | ' . $settings['app_name'];
+            $this->data['meta_description'] = ' Visit Delegate  | ' . $settings['app_name'];
+            $this->data['about_us'] = get_settings('about_us');
+            $this->data['curreny'] = get_settings('currency');
+
+            $this->load->view('admin/template', $this->data);
+        } else {
+            redirect('admin/login', 'refresh');
         }
     }
 
