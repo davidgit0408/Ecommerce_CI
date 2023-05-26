@@ -418,6 +418,38 @@
                         </ul>
                     </li>
                 <?php } ?>
+                <?php if (has_permissions('read', 'delegates')) { ?>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-user text-success"></i>
+                            <p>
+                                Deligate
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= base_url('admin/deligate/view_delegate') ?>" class="nav-link">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p> View Delegates </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('admin/deliagte/visit_delegate') ?>" class="nav-link">
+                                    <i class="fas fa-money-bill-wave nav-icon "></i>
+                                    <p> Visit Delegate </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('admin/deligate/mission_delegate') ?>" class="nav-link">
+                                    <i class="fas fa-wallet nav-icon "></i>
+                                    <p> Mission Delegate </p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                <?php } ?>
                 <?php if (has_permissions('read', 'return_request')) { ?>
                     <li class="nav-item has-treeview">
                         <a href="<?= base_url('admin/return-request') ?>" class="nav-link">

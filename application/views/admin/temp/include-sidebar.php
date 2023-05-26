@@ -364,6 +364,35 @@
                 </ul>
             </li>
         <?php } ?>
+        <?php if (has_permissions('read', 'delegates')) { ?>
+            <li class="menu-item">
+                <a href="#" class="menu-link menu-toggle">
+                    <i class="menu-icon fa fa-qrcode text-success"></i>
+                    <div data-i18n="Delegate">Delegate</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="<?= base_url('admin/delegate/') ?>" class="menu-link">
+                            <i class="fas fa-users menu-icon"></i>
+                            <div data-i8n=" View Delegates "> View Delegates </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="<?= base_url('admin/delegate/visit_delegate') ?>" class="menu-link">
+                            <i class="far fa-eye-low-vision menu-icon"></i>
+                            <div data-i8n=" Visit Delegate "> Visit Delegate </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="<?= base_url('admin/delegate/mission_delegate') ?>" class="menu-link">
+                            <i class="fas fa-money-bill-wave menu-icon "></i>
+                            <div data-i8n=" mission_delegate "> mission_delegate </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        <?php } ?>
         <?php if (has_permissions('read', 'delivery_boy') || has_permissions('read', 'fund_transfer')) { ?>
             <li class="menu-item">
                 <a href="#" class="menu-link menu-toggle">
