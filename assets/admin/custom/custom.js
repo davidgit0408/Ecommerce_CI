@@ -2258,8 +2258,49 @@ $(document).on('click', '#delete-product', function () {
     });
 });
 
+$(document).on('click', '#delete-mission', function () {
+    var id = $(this).data('id');
+    Swal.fire({
+        title: 'Are You Sure!',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: base_url + from + '/delegate/delete_mission',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json'
+                }).done(function (response, textStatus) {
+                    if (response.error == false) {
+
+                        Swal.fire('Deleted!', response.message, 'success');
+                    } else {
+                        Swal.fire('Oops...', response.message, 'error');
+                    }
+                    $('table').bootstrapTable('refresh');
+                    csrfName = response['csrfName'];
+                    csrfHash = response['csrfHash'];
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire('Oops...', 'Something went wrong with ajax !', 'error');
+                    csrfName = response['csrfName'];
+                    csrfHash = response['csrfHash'];
+                });
+            });
+        },
+        allowOutsideClick: false
+    });
+});
+
 // multiple_values
-$('.select_single , .multiple_values , #product-type').each(function () {
+$('.select_single , .multiple_values , #product-type, #delegate_name, #customer_name').each(function () {
     $(this).select2({
         theme: 'bootstrap4',
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',

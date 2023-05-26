@@ -220,48 +220,6 @@
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <div>
-                                            <label>Filter Order Items By status</label>
-                                            <select id="order_status" name="order_status" placeholder="Select Status" required="" class="form-control">
-                                                <option value="">All Orders</option>
-                                                <option value="awaiting">Awaiting</option>
-                                                <option value="received">Received</option>
-                                                <option value="processed">Processed</option>
-                                                <option value="shipped">Shipped</option>
-                                                <option value="delivered">Delivered</option>
-                                                <option value="cancelled">Cancelled</option>
-                                                <option value="returned">Returned</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Filter By payment  -->
-                                    <div class="form-group col-md-3">
-                                        <div>
-                                            <label>Filter By Payment Method</label>
-                                            <select id="payment_method" name="payment_method" placeholder="Select Payment Method" required="" class="form-control">
-                                                <option value="">All Payment Methods</option>
-                                                <option value="COD">Cash On Delivery</option>
-                                                <option value="Paypal">Paypal</option>
-                                                <option value="RazorPay">RazorPay</option>
-                                                <option value="Paystack">Paystack</option>
-                                                <option value="Flutterwave">Flutterwave</option>
-                                                <option value="Paytm">Paytm</option>
-                                                <option value="Stripe">Stripe</option>
-                                                <option value="bank_transfer">Direct Bank Transfers</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <div>
-                                            <label>Filter By Order Based on Product Type</label>
-                                            <select id="order_type" name="order_type" placeholder="Select Order Type" required="" class="form-control">
-                                                <option value="">All Orders</option>
-                                                <option value="physical_order">Physical Orders</option>
-                                                <option value="digital_order">Digital Orders</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="form-group col-md-4 d-flex align-items-center pt-4">
                                         <button type="button" class="btn btn-outline-primary btn-sm" onclick="status_date_wise_search()">Filter</button>
                                     </div>

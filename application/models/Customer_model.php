@@ -129,6 +129,89 @@ class Customer_model extends CI_Model
         print_r(json_encode($bulkData));
     }
 
+    public function get_mission_list()
+    {
+
+        $settings = get_settings('system_settings', true);
+        $low_stock_limit = isset($settings['low_stock_limit']) ? $settings['low_stock_limit'] : 5;
+        $offset = 0;
+        $limit = 10;
+        $sort = 'id';
+        $order = 'ASC';
+        $multipleWhere = '';
+        if (isset($_GET['offset']))
+            $offset = $_GET['offset'];
+        if (isset($_GET['limit']))
+            $limit = $_GET['limit'];
+
+        if (isset($_GET['sort']))
+            if ($_GET['sort'] == 'id') {
+                $sort = "m.id";
+            } else {
+                $sort = $_GET['sort'];
+            }
+        if (isset($_GET['order']))
+            $order = $_GET['order'];
+
+        if (isset($_GET['search']) and $_GET['search'] != '') {
+            $search = trim($_GET['search']);
+            $multipleWhere = ['m.`id`' => $search, 'ud.`username`' => $search, 'uc.`username`' => $search];
+        }
+
+        $count_res = $this->db->select(' m.*,uc.username as customer_name,ud.username as delegate_name ')
+            ->join('users uc', ' uc.id = m.customer_id ', 'left')
+            ->join('users ud', ' ud.id = m.delegate_id ', 'left');
+
+        if (isset($multipleWhere) && !empty($multipleWhere)) {
+            $count_res->group_Start();
+            $count_res->or_like($multipleWhere);
+            $count_res->group_End();
+        }
+        if (isset($where) && !empty($where)) {
+            $count_res->where($where);
+        }
+
+        $product_count = $count_res->get('mission m')->result_array();
+        foreach ($product_count as $row) {
+            $total = $row['total'];
+        }
+        $search_res = $this->db->select(' m.*,uc.username as customer_name,ud.username as delegate_name ')
+            ->join('users uc', ' uc.id = m.customer_id ', 'left')
+            ->join('users ud', ' ud.id = m.delegate_id ', 'left');
+        if (isset($multipleWhere) && !empty($multipleWhere)) {
+            $search_res->group_Start();
+            $search_res->or_like($multipleWhere);
+            $search_res->group_End();
+        }
+
+        if (isset($where) && !empty($where)) {
+            $search_res->where($where);
+        }
+
+        $pro_search_res = $search_res->order_by($sort, "DESC")->limit($limit, $offset)->get('mission m')->result_array();
+        $currency = get_settings('currency');
+        $bulkData = array();
+        $bulkData['total'] = $total;
+        $rows = array();
+        $tempRow = array();
+        foreach ($pro_search_res as $row) {
+
+            $row = output_escaping($row);
+
+            $operate = '<div><a href="javascript:void(0)" id="delete-mission" data-id=' . $row['id'] . ' class="btn action-btn btn-danger mr-1 mb-1  btn-xs"><i class="fa fa-trash"></i></a>';
+
+            $tempRow['id'] = $row['id'];
+            $tempRow['delegate_name'] = $row['delegate_name'];
+            $tempRow['customer_name'] = $row['customer_name'];
+            $tempRow['visiting_days'] = date("Y-m-d H:i:s", $row['visiting_days']);
+
+            $tempRow['operate'] = $operate;
+            $rows[] = $tempRow;
+        }
+        $bulkData['rows'] = $rows;
+        print_r(json_encode($bulkData));
+    }
+
     public function get_delegate_list()
     {
 
