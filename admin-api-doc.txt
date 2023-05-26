@@ -1,0 +1,216 @@
+/*
+	WRTeam Developers
+*/
+
+API URL -->> 
+	http://vendor.eshopweb.store/admin/app/v1/api/{METHOD_NAME}  - (all APIs in one file only)
+
+---------------------------------------------------------------------------
+Defined API Methods:-
+---------------------------------------------------------------------------
+
+1. login
+2  get_orders
+3. update_order_item_status
+4. get_categories
+5. get_products
+6. get_customers
+7. get_transactions
+8. get_statistics
+9. forgot_password
+10. delete_order
+11. get_delivery_boys
+12. verify_user
+13. get_settings
+14. update_fcm
+15. send_message
+16. edit_ticket
+17. get_ticket_types
+18. get_tickets
+19. get_messages
+20. get_cities
+21. get_areas_by_city_id
+22. delete_order_receipt
+23. get_sellers
+24. get_order_tracking
+25. edit_order_tracking
+26. update_receipt_status
+------------------------------------------
+What parameters to be Passed?  See here >>
+------------------------------------------
+
+
+Use POST method to pass the parameters
+
+1.login
+    mobile: 9874565478
+    password: 12345678
+    fcm_id: FCM_ID //{ optional }
+
+2. get_orders
+    id:101 { optional }
+    city_id:1 { optional }
+    area_id:1 { optional }
+    user_id:101 { optional }
+    active_status:received  {received,delivered,cancelled,processed,returned}     // optional
+    start_date:2020-09-07 or 2020/09/07 { optional }
+    end_date:2021-03-15 or 2021/03/15 { optional }
+    search:keyword { optional }
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort: id / date_added // { default - id } optional
+    order:DESC/ASC      // { default - DESC } optional
+
+3. update_order_item_status
+    order_item_id:1
+    status : received / processed / shipped / delivered / cancelled / returned
+
+4. 
+
+4. get_categories
+    id:15               // optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               id / name // { default - id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    has_child_or_item:false { default - true}  optional
+
+5. get_products
+    id:101              // optional
+    category_id:29      // optional
+    user_id:15          // optional
+    search:keyword      // optional
+    tags:multiword tag1, tag2, another tag      // optional
+    flag:low/sold      // optional
+    attribute_value_ids : 34,23,12 // { Use only for filteration } optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:p.id / p.date_added / pv.price // { default - p.id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    is_similar_products:1 // { default - 0 } optional
+    top_rated_product: 1 // { default - 0 } optional
+    show_only_active_products:false { default - true } optional
+
+6. get_customers
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+7. get_transactions
+    user_id:73              // { optional}
+    id: 1001                // { optional}
+    transaction_type:transaction / wallet // { default - transaction } optional
+    type : COD / stripe / razorpay / paypal / paystack / flutterwave - for transaction | credit / debit - for wallet // { optional }
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id / date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+8. get_statistics
+
+9. forgot_password
+    mobile_no:7894561235            
+    new: pass@123
+
+10. delete_order
+    order_id:1
+
+11. get_delivery_boys
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+12. verify_user
+    mobile: 9874565478
+    email: test@gmail.com // { optional }
+
+13. get_settings
+    type : payment_method // { default : all  } optional            
+    user_id:  15 { optional }
+
+14. update_fcm
+    user_id:12
+    fcm_id: FCM_ID
+
+15. send_message
+    user_type:admin
+    user_id:1
+    ticket_id:1	
+    message:test	
+    attachments[]:files  {optional} {type allowed -> image,video,document,spreadsheet,archive}
+
+16. edit_ticket
+    ticket_id:1
+    ticket_type_id:1
+    subject:product_image not displying
+    email:test@gmail.com
+    description:its not showing images of products in web
+    user_id:1
+    status:3 or 5 [3 -> resolved, 5 -> reopened]
+
+17. get_ticket_types
+
+18. get_tickets
+    ticket_id: 1001                // { optional}
+    ticket_type_id: 1001                // { optional}
+    user_id: 1001                // { optional}
+    status:   [1 -> pending, 2 -> opened, 3 -> resolved, 4 -> closed, 5 -> reopened]// { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id | date_created | last_updated                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+19. get_messages
+    ticket_id: 1001            
+    user_type: 1001                // { optional}
+    user_id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id | date_created | last_updated                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+20. get_cities  
+    limit:10 {optional}
+    offset:0 {optional}
+		
+21. get_areas_by_city_id
+    id='57'
+
+22. delete_order_receipt
+    id=57
+
+23. get_sellers
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+24. get_order_tracking
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
+
+25. edit_order_tracking
+    order_id:57 
+    order_item_id:123
+    courier_agency:asd agency
+    tracking_id:t_id123
+    url:http://test.com
+
+26. update_receipt_status
+    order_id:57 
+    user_id:123
+    status:1        // { 0:pending|1:rejected|2:accepted }  

@@ -1,0 +1,79 @@
+/* colors */
+
+.badge-primary,
+.add-to-cart,
+.dark-footer-margin,
+.header-categories-nav-wrap,
+.topbar-text-color,
+.nva-color,
+.subscribe-form button,
+.custom-row,
+.copyright,
+.product-grid .social li a:hover,
+.button-success,
+.button-success:hover, .button-success:focus, .button-success-outline:hover, .button-success-outline:focus,
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link,
+.toggle-input:checked+.toggle.switch, .toggle.switch.is-active,
+.toggle-input:disabled:checked+.toggle.switch, .toggle.switch.is-active.is-disabled,
+.toggle-input:checked+.toggle.radio, .toggle.radio.is-active,
+.toggle-input:disabled:checked+.toggle.radio, .toggle.radio.is-active.is-disabled,
+.toggle-input:disabled:checked+.toggle.switch, .toggle.switch.is-active.is-disabled,
+.toggle-input:checked+.toggle.checkbox, .toggle.checkbox.is-active,
+.toggle-input:disabled:checked+.toggle.checkbox, .toggle.checkbox.is-active.is-disabled {
+    background-color: #43ae47 !important;
+}
+
+
+.see-all-category,
+.setting-icon,
+.single-cta i,
+.copyright-text p a,
+.link-color,
+.featured-section-view-more,
+.header-h1 .mobile-app-text,
+.icon-hover:hover,
+small.transparent-footer-link a,
+.footer-menu li:hover a,
+ul.sub-submenu li:hover,
+.category li:hover .cat-name,
+.category li:hover .cat-no,
+.footer-widget ul li a:hover,
+.product-grid:hover .title a,
+.span-color,
+.header-icon:hover, .header-icon:focus,
+.sidebar #leftside-navigation ul li a:hover,
+.link-color circle,.link-color polyline,.link-color path{
+    color: #43ae47 !important;
+    stroke: #43ae47 !important;
+}
+
+.progress-bar{
+    background-image: linear-gradient(to right top, #ffffff, #43ae47, #43ae47, #43ae47, #43ae47);
+}
+
+.subscribe-form button{
+    border:  #43ae47 !important;;
+}
+
+.footer-widget-heading h3::before,
+.swiper-pagination-bullet-active{
+    background: #43ae47 !important;;
+}
+
+.style-3-product-right-lg .product-grid{
+    border:1px solid #43ae47 !important;
+}
+
+.sidenav .nav-link.active{
+    box-shadow: 0 2px 0 #43ae47 !important;
+}
+
+.button-success,
+.button-success:hover, .button-success:focus, .button-success-outline:hover, .button-success-outline:focus{
+    border-color: #43ae47 !important;
+}
+
+.colored-breadcrumb, 
+.page-footer{
+    background-color: #43ae4747  !important;
+}

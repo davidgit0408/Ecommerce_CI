@@ -1,0 +1,551 @@
+/*
+	WRTeam Developers
+*/
+
+API URL -->> 
+	http://vendor.eshopweb.store/app/v1/api/{METHOD_NAME}  - (all APIs in one file only)
+
+---------------------------------------------------------------------------
+Defined API Methods:-
+---------------------------------------------------------------------------
+
+        1. get_categories 	
+        2. get_cities
+        3. get_areas_by_city_id
+        4. get_products
+        5. get_settings
+        6. get_slider_images
+        7. validate_promo_code
+
+        // user's orders management
+        8. place_order
+            - add_transaction
+        9. get_orders
+        10. update_order_item_status
+
+        // user's ratings management
+        11. set_product_rating
+        12. delete_product_rating
+        13. get_product_rating
+            get_product_review_images
+
+        // user's address management
+        14.add_address
+        15.update_address
+        16.delete_address
+        17.get_address
+
+        // user's cart management
+        18.get_user_cart
+        19.remove_from_cart
+        20.manage_cart(Add/Update)
+
+        // user management        
+        21.verify_user
+        22.register_user
+        23.update_user	
+            -reset_password
+        24.login
+            -get_login_identity	
+
+        // section management
+        25.get_sections
+        26.get_notifications
+
+        // favorite management
+        27.add_to_favorites(Add/Update)
+        28.remove_from_favorites
+        29.get_favorites
+        30.get_jwt_key   
+
+        //Paypal
+        31.get_paypal_link()    
+        32.get_offer_images
+        33.get_faqs
+        34. stripe_webhook
+        35. transactions       
+        36. generate_paytm_checksum
+        37. generate_paytm_txn_token
+        38. validate_paytm_checksum
+        39. validate_refer_code
+        40. flutterwave_webview
+        41. flutterwave_payment_response
+        42. delete_order
+        // SUPPORT TICKET API
+        43. get_ticket_types
+        44. add_ticket
+        45. edit_ticket
+        46. send_message
+        47. get_tickets
+        48. get_messages
+
+        // Direct Bank Transfer
+        49. send_bank_transfer_proof
+        50. get_zipcodes
+
+        51. get_sellers
+        52. get_promo_codes
+        53. upload_media
+
+        54. add_product_faqs
+        55. get_product_faqs
+
+        56. send_withdrawal_request
+        57. get_withdrawal_request
+        
+        58. delete_user
+------------------------------------------
+What parameters to be Passed?  See here >>
+------------------------------------------
+
+
+Use POST method to pass the parameters
+
+1. get_categories
+
+    id:15               // optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               id / name
+                        // { default -id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    has_child_or_item: true { default - false}  optional
+
+2. get_cities
+
+        sort:               // { c.name / c.id } optional
+        order:DESC/ASC      // { default - ASC } optional
+        search:value        // {optional}
+        limit:25            // { default - 25 } optional
+        offset:0            // { default - 0 } optional
+    
+3. get_areas_by_city_id
+
+        id='57'
+        search:value        // {optional}
+        limit:25            // { default - 25 } optional
+        offset:0            // { default - 0 } optional
+
+4. get_products
+        id:101              // optional
+        category_id:29      // optional
+        search:keyword      // optional
+        tags:multiword tag1, tag2, another tag      // optional
+        attribute_value_ids : 34,23,12 // { Use only for filteration } optional 
+        limit:25            // { default - 25 } optional
+        offset:0            // { default - 0 } optional
+        sort:p.id / p.date_added / pv.price
+                        // { default - p.id } optional
+        order:DESC/ASC      // { default - DESC } optional 
+        is_similar_products:1 // { default - 0 } optional
+        discount: 5 // { default - 5 } optional
+        min_price:10000          // optional
+        max_price:50000          // optional
+        seller_id:1255           //{optional}
+        zipcode:1          // optional
+        product_ids: 19,20             // optional
+        product_variant_ids: 44,45,40             // optional
+
+5. get_settings
+
+        type : payment_method // { default : all  } optional            
+        user_id:  15 { optional }
+        
+6. get_slider_images
+
+        //To Get Slider Image
+        get_slider_images
+    
+7. validate_promo_code
+
+        promo_code:'NEWOFF10'
+        user_id:28
+        final_total:'300'
+
+
+8. place_order
+
+        user_id:5
+        mobile:9974692496
+        product_variant_id:1,2,3
+        quantity:3,3,1
+        total:60.0
+        delivery_charge:20.0
+        tax_amount:10
+        tax_percentage:10		 
+        final_total:55
+        latitude:40.1451
+        longitude:45.4545
+        promo_code:NEW20 {optional}
+        promo_discount:20 {optional}
+        payment_method: Paypal / Payumoney / COD / PAYTM / bank_transfer
+        address_id:12
+        delivery_time:Today - Evening (4:00pm to 7:00pm)
+        is_wallet_used:1 {By default 0}
+        wallet_balance_used:160
+        order_note:text      //{optional}
+        documents[]:FILES   
+
+    - add_transaction
+        transaction_type : transaction / wallet  // { optional - default is transaction }
+        user_id : 15 
+        order_id:  23
+        type : COD / stripe / razorpay / paypal / paystack  / bank_transfer / flutterwave - for transaction | credit / debit - for wallet
+        payment_method:razorpay / paystack / flutterwave        // used for waller credit option, required when transaction_type - wallet and type - credit
+        txn_id : 201567892154 
+        amount : 450
+        status : success / failure / awaiting
+        message : Done 
+
+9. get_orders
+
+        user_id:101             	    
+        active_status:received  // {received,delivered,cancelled,processed} optional
+        limit:25                // { default - 25 } optional
+        offset:0                // { default - 0 } optional
+        sort: id / date_added   // { default - id } optional
+        order:DESC/ASC          // { default - DESC } optional
+        download_invoice:1 // { default - 0 } optional    
+        
+10. update_order_item_status
+
+        status: { cancelled / returned }
+        order_id:21 
+
+11. set_product_rating
+
+        user_id: 21
+        product_id: 33
+        rating: 4.2
+        comment: 'Done' {optional}
+        images[]:[]
+
+12. delete_product_rating
+
+        rating_id:32
+
+13. get_product_rating 
+        product_id : 12
+        user_id : 1 	{optional} 
+        limit:25                // { default - 25 } optional
+        offset:0                // { default - 0 } optional
+        sort: type   			// { default - type } optional
+        order:DESC/ASC          // { default - DESC } optional
+
+        product_id : 12
+        limit:25                // { default - 25 } optional
+        offset:0                // { default - 0 } optional
+
+14. add_address
+        user_id:3
+        type:Home/Office/Others {optional}
+        name:John Smith {optional}
+        country_code:+91 {optional}
+        mobile:1234567890 {optional}
+        alternate_mobile:9876543210 {optional}
+        address:Time Square Empire {optional}
+        landmark:Bhuj-Mirzapar Highway {optional}
+        area_id:1 {optional}
+        city_id:2 {optional}
+        pincode:0123456 {optional}
+        state:Gujarat {optional}
+        country:India {optional}
+        is_default:1 {optional}{default - 0}
+
+15. update_address
+        id:1
+        type:Home/Office/Others {optional}
+        name:John Smith {optional}
+        country_code:+91 {optional}
+        mobile:1234567890 {optional}
+        alternate_mobile:9876543210 {optional}
+        address:Time Square Empire {optional}
+        landmark:Bhuj-Mirzapar Highway {optional}
+        area_id:1 {optional}
+        city_id:2 {optional}
+        pincode:0123456 {optional}
+        state:Gujarat {optional}
+        country:India {optional}
+        is_default:1 {optional}{default - 0}
+
+16. delete_address
+        id:4    
+        
+17. get_address 
+        user_id:3
+        offset:0 {optional}
+        limit:5 {optional}
+
+18. get_user_cart
+        user_id:2
+         is_saved_for_later: 1 { default:0 }
+
+19. remove_from_cart // Deleted API        
+
+20. manage_cart(Add/Update/Remove) 
+        user_id:2
+        product_variant_id:60
+        is_saved_for_later: 1 { default:0 }
+        qty:6
+
+21. verify_user
+        mobile: 9874565478
+
+22. register_user
+        name:gk 
+        email:gurnanikaran67@gmail.com 
+        mobile:9874565478 
+        dob:1998/11/12 {optional}
+        city:bhuj {optional}
+        area:ravalwadi {optional}
+        street:123 {optional}
+        pincode:370001 {optional}        
+        fcm_id:YOUR_FCM_ID {optional}
+        referral_code:MY_CODE
+        friends_code:45dsrwr {optional}
+        latitude:66.89 {optional}
+        longitude:67.8 {optional}
+        password:12345     
+
+23. update_user
+        user_id:34
+        username:hiten {optional}
+        mobile:7852347890 {optional}
+        email:amangoswami@gmail.com	{optional}
+        address:Time Square	{optional}
+        area:ravalwadi	{optional}
+        city:bhuj	{optional}
+        pincode:370001	{optional}
+        //optional parameters
+        referral_code:Userscode
+        old:12345
+        new:345234
+        //file
+        image:[] //{optional}
+              
+    - reset_password
+        mobile_no:7894561235
+        new: pass@123     
+24. login
+        mobile: 9874565478
+        password: 12345678
+        fcm_id: FCM_ID 
+              
+    - get_login_identity
+
+25. get_sections
+ 
+    limit:10            // { default - 25 } {optional}
+    offset:0            // { default - 0 } {optional}
+    user_id:12              {optional}
+    section_id:4            {optional}
+    attribute_value_ids : 34,23,12 // 
+    top_rated_product: 1 // { default - 0 } optional
+    p_limit:10          // { default - 10 } {optional}
+    p_offset:10         // { default - 0 } {optional}    
+    p_sort:pv.price      // { default - pid } {optional}
+    p_order:asc         // { default - desc } {optional}
+    discount: 5 // { default - 5 } optional
+    min_price:10000          // optional
+    max_price:50000          // optional
+    zipcode:1          // optional
+
+
+26. get_notifications
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: type   		// { default - type } optional
+    order:DESC/ASC          // { default - DESC } optional        
+
+27. add_to_favorites
+    user:15
+    product_id:60
+
+28.remove_from_favorites    
+        user_id:12
+        product_id:23 {optional}
+
+29. get_favorites
+    user_id:12
+    limit : 10 {optional}
+    offset: 0 {optional}       
+             
+30. get_jwt_key
+
+31. get_paypal_link
+
+    user_id:73
+    order_id:11
+    amount:150
+
+32. get_offer_images
+
+        //To Get Offer Images
+        get_offer_images        
+
+33. get_faqs
+
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id   			    // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+34. stripe_webhook 
+    // Used by the Stripe webhook
+
+35. transactions
+
+    user_id:73 
+    id: 1001                // { optional }
+    transaction_type:transaction / wallet //razorpay { default - transaction } optional
+    type : COD / stripe / razorpay / paypal / paystack /refund/ flutterwave - for transaction | credit / debit - for wallet // { optional }
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id / date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+36. generate_paytm_checksum
+
+    order_id:1001
+    amount:1099
+    user_id:73              //{ optional } 
+    industry_type:Industry  //{ optional } 
+    channel_id:WAP          //{ optional }
+    website:website link    //{ optional }
+
+37. generate_paytm_txn_token
+
+    amount:100.00
+    order_id:102
+    user_id:73
+    industry_type:      //{optional}
+    channel_id:      //{optional}
+    website:      //{optional}
+
+38. validate_paytm_checksum
+
+    paytm_checksum:PAYTM_CHECKSUM
+    order_id:1001
+    amount:1099
+    user_id:73              //{ optional } 
+    industry_type:Industry  //{ optional } 
+    channel_id:WAP          //{ optional }
+    website:website link    //{ optional }
+
+39. validate_refer_code
+
+    referral_code:USERS_CODE_TO_BE_VALIDATED
+
+40. flutterwave_webview
+    amount:100
+    user_id:73
+    reference:eShop-165232013-400  // { optional }
+
+41. flutterwave_payment_response
+
+42. delete_order
+    order_id:1
+
+43. get_ticket_types
+
+44. add_ticket
+    ticket_type_id:1
+    subject:product_image not displying
+    email:test@gmail.com
+    description:its not showing images of products in web
+    user_id:1
+
+45. edit_ticket
+    ticket_id:1
+    ticket_type_id:1
+    subject:product_image not displying
+    email:test@gmail.com
+    description:its not showing images of products in web
+    user_id:1
+    status:3 or 5 [3 -> resolved, 5 -> reopened]
+
+46. send_message
+    user_type:user
+    user_id:1
+    ticket_id:1	
+    message:test	
+    attachments[]:files  {optional} {type allowed -> image,video,document,spreadsheet,archive}
+
+47. get_tickets
+    ticket_id: 1001                // { optional}
+    ticket_type_id: 1001                // { optional}
+    user_id: 1001                // { optional}
+    status:   [1 -> pending, 2 -> opened, 3 -> resolved, 4 -> closed, 5 -> reopened]// { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id | date_created | last_updated                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+48. get_messages
+    ticket_id: 1001            
+    user_type: 1001                // { optional}
+    user_id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id | date_created | last_updated                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+49. send_bank_transfer_proof
+    order_id:1
+    attachments:file  {optional} {type allowed -> image,video,document,spreadsheet,archive}
+
+50. get_zipcodes
+    limit:10 {optional}
+    offset:0 {optional}
+
+51. get_sellers
+    zipcode:1  //{optional}
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id | date_created | last_updated                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+    search:Search keyword // { optional }
+
+52. get_promo_codes
+
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:id               id / name
+    order:DESC/ASC      // { default - DESC } optional  
+    search:value        //{optional}   
+
+53. upload_media
+    documents[]:FILES
+
+54. add_product_faqs
+    product_id:25   
+    user_id:1      
+    question:test
+
+55. get_product_faqs
+    id:2    // {optional}
+    product_id:25   // {optional}
+    user_id:1       // {optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 10 } optional
+    offset:0                // { default - 0 } optional
+    sort: id                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+56. send_withdrawal_request
+    user_id:15
+    payment_address: 12343535
+    amount: 560
+
+57. get_withdrawal_request
+    user_id:15
+    limit:10
+    offset:10
+
+58. delete_user
+    user_id:15
+    mobile:9874563214
+    password:12345695

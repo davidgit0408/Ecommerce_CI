@@ -1,0 +1,472 @@
+/*
+	WRTeam Developers
+*/
+
+API URL -->> 
+	http://vendor.eshopweb.store/seller/app/v1/api/{METHOD_NAME}  - (all APIs in one file only)
+
+---------------------------------------------------------------------------
+Defined API Methods:-
+---------------------------------------------------------------------------
+
+1. login
+2  get_orders
+3. get_order_items
+4. update_order_item_status
+5. get_categories
+6. get_products
+7. get_customers
+8. get_transactions
+9. get_statistics
+10. forgot_password
+11. delete_order
+12. verify_user
+13. get_settings
+14. update_fcm
+15. get_cities
+16. get_areas_by_city_id
+17. get_zipcodes
+18. get_taxes
+19. send_withdrawal_request
+20. get_withdrawal_request
+21. get_attribute_set
+22. get_attributes
+23. get_attribute_values
+24. add_products
+25. get_media
+26. get_seller_details
+27. update_user
+28. delete_product
+29. update_products
+30. get_delivery_boys
+31. register
+32. upload_media
+33. get_product_rating 
+34. get_order_tracking
+35. edit_order_tracking
+36 .get_sales_list
+37.update_product_status
+38. add_product_faqs
+39. get_product_faqs
+40. delete_product_faq
+41. edit_product_faq
+42. delete_seller
+------------------------------------------
+What parameters to be Passed?  See here >>
+------------------------------------------
+
+
+Use POST method to pass the parameters
+
+1.login
+    mobile: 9988776655
+    password: 12345678
+    fcm_id: FCM_ID //{ optional }
+
+2. get_orders
+    seller_id:1255
+    id:3446 { optional }
+    city_id:1 { optional }
+    area_id:1 { optional }
+    user_id:101 { optional }
+    start_date : 2020-09-07 or 2020/09/07 { optional }
+    end_date : 2021-03-15 or 2021/03/15 { optional }
+    search:keyword      // optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort: id / date_added // { default - id } optional
+    order:DESC/ASC      // { default - DESC } optional
+
+3. get_order_items
+    seller_id:1255 
+    id:101 { optional }
+    user_id:101 { optional }
+    order_id:101 { optional }
+    active_status: received  {received,delivered,cancelled,processed,returned}     // optional
+    start_date : 2020-09-07 or 2020/09/07 { optional }
+    end_date : 2021-03-15 or 2021/03/15 { optional }
+    search:keyword      // optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort: oi.id / oi.date_added // { default - id } optional
+    order:DESC/ASC      // { default - DESC } optional
+
+4. update_order_item_status
+    order_item_id:6572
+    status : received / processed / shipped / delivered / cancelled / returned
+    delivery_boy_id: 15 {optional}
+
+5. get_categories
+    seller_id:1255
+
+6. get_products
+    seller_id:1255
+    id:101              // optional
+    category_id:29      // optional
+    user_id:15          // optional
+    search:keyword      // optional
+    tags:multiword tag1, tag2, another tag      // optional
+    flag:low/sold      // optional
+    attribute_value_ids : 34,23,12 // { Use only for filteration } optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:p.id / p.date_added / pv.price
+    order:DESC/ASC      // { default - DESC } optional
+    is_similar_products:1 // { default - 0 } optional
+    top_rated_product: 1 // { default - 0 } optional
+    show_only_active_products:0 { default - 1 } optional
+    status:1
+7. get_customers
+    seller_id:1255
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+8. get_transactions
+    user_id:73              // { optional}
+    id: 1001                // { optional}
+    type : credit / debit - for wallet // { optional }
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id / date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+9. get_statistics
+    seller_id:1255
+
+10. forgot_password
+    mobile_no:7894561235            
+    new: pass@123
+
+11. delete_order
+    order_id:1
+
+12. verify_user
+    mobile: 9874565478
+    email: test@gmail.com // { optional }
+
+13. get_settings
+    type : payment_method // { default : all  } optional            
+    user_id:  15 { optional }
+
+14. update_fcm
+    user_id:12
+    fcm_id: FCM_ID
+
+15. get_cities
+    sort:c.name               // { c.name / c.id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    search:value        // {optional} 
+
+16. get_areas_by_city_id
+    id:57 
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { a.name / a.id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    search:value        // {optional} 
+
+17.get_zipcodes
+    limit:10 {optional}
+    offset:0 {optional}
+    search:0 {optional}
+
+18. get_taxes
+
+19. send_withdrawal_request
+    user_id:174
+    payment_address: 12343535
+    amount: 56
+
+20. get_withdrawal_request
+    user_id:15  
+    limit:10  {optional}
+    offset:10  {optional}
+
+21. get_attribute_set
+    sort: ats.name              // { ats.name / ats.id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    search:value        // {optional} 
+    limit:10  {optional}
+    offset:10  {optional}
+
+22. get_attributes
+    attribute_set_id:1  // {optional}
+    sort: a.name              // { a.name / a.id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    search:value        // {optional} 
+    limit:10  {optional}
+    offset:10  {optional}
+
+23. get_attribute_values
+    attribute_id:1  // {optional}
+    sort:a.name               // { a.name / a.id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    search:value        // {optional} 
+    limit:10  {optional}
+    offset:10  {optional}
+
+24. add_products
+    seller_id:1255
+    pro_input_name: product name
+    short_description: description
+    tags:tag1,tag2,tag3     //{comma saprated}                         //{optional}
+    pro_input_tax:tax_id                         //{optional}
+    indicator:1             //{ 0 - none | 1 - veg | 2 - non-veg }   //{optional}
+    made_in: india          //{optional}
+    total_allowed_quantity:100                                        
+    minimum_order_quantity:12
+    quantity_step_size:1
+    warranty_period:1 month {optional}
+    guarantee_period:1 month {optional}
+    deliverable_type:1        //{0:none, 1:all, 2:include, 3:exclude}    {default:1}
+    deliverable_zipcodes:1,2,3  //{NULL: if deliverable_type = 0 or 1}    {default:null}
+    is_prices_inclusive_tax:0   //{1: inclusive | 0: exclusive}                                 //{optional}
+    cod_allowed:1               //{ 1:allowed | 0:not-allowed }                          //{optional}
+    is_returnable:1             // { 1:returnable | 0:not-returnable }                           //{optional}
+    is_cancelable:1             //{1:cancelable | 0:not-cancelable}                         //{optional}
+    cancelable_till:            //{received,processed,shipped}                         //{optional}
+    pro_input_image:file  
+    other_images: files                         //{optional}
+    video_type:                 // {values: vimeo | youtube}                         //{optional}
+    video:                      //{URL of video}                         //{optional}
+    pro_input_video: file                         //{optional}
+    pro_input_description:product's description
+    category_id:99
+    attribute_values:1,2,3,4,5
+    --------------------------------------------------------------------------------
+    till above same params
+    --------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------
+    common param for simple and variable product
+    --------------------------------------------------------------------------------          
+    product_type:simple_product | variable_product  
+    variant_stock_level_type:product_level | variable_level
+    
+    if(product_type == variable_product):
+        variants_ids:3 5,4 5,1 2
+        variant_price:100,200
+        variant_special_price:90,190                          //{optional}
+        variant_images:files              //{optional}
+
+        sku_variant_type:test            //{if (variant_stock_level_type == product_level)}
+        total_stock_variant_type:100     //{if (variant_stock_level_type == product_level)}
+        variant_status:1                 //{if (variant_stock_level_type == product_level)}
+
+        variant_sku:test,test             //{if(variant_stock_level_type == variable_level)}
+        variant_total_stock:120,300       //{if(variant_stock_level_type == variable_level)}
+        variant_level_stock_status:1,1    //{if(variant_stock_level_type == variable_level)}
+
+    if(product_type == simple_product):
+        simple_product_stock_status:null|0|1   {1=in stock | 0=out stock}
+        simple_price:100
+        simple_special_price:90                          //{optional}
+        product_sku:test
+        product_total_stock:100
+        variant_stock_status: 0            //{0 =>'Simple_Product_Stock_Active' 1 => "Product_Level" 2 => "Variable_Level"	}
+
+25. get_media
+    seller_id:1255            // {optional}
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
+    type:image          // {documents,spreadsheet,archive,video,audio,image}
+
+26. get_seller_details
+    id:1255
+
+27. update_user
+    id:34  {seller_id}
+    name:hiten
+    mobile:7852347890
+    email:amangoswami@gmail.com	
+    old:12345                       //{if want to change password} {optional}
+    new:345234                      //{if want to change password} {optional}
+    address:test
+    store_name:storename
+    store_url:url
+    store_description:test
+    account_number:123esdf
+    account_name:name
+    bank_code:INBsha23
+    bank_name:bank name
+    latitude:+37648
+    longitude:-478237
+    tax_name:GST
+    tax_number:GSTIN6786
+    pan_number:GNU876
+    status:1 | 0                  //{1: active | 0:deactive}
+    store_logo: file              // {pass if want to change} {optional}
+    national_identity_card: file              // {pass if want to change} {optional}
+    address_proof: file              // {pass if want to change} {optional}
+
+28. delete_product
+    product_id:28
+
+29. update_products
+    edit_product_id:74
+    edit_variant_id:104,105
+    variants_ids: new created with new attributes added
+
+
+    seller_id:1255
+    
+    pro_input_name: product name
+    short_description: description
+    tags:tag1,tag2,tag3     //{comma saprated}
+    pro_input_tax:tax_id
+    indicator:1             //{ 0 - none | 1 - veg | 2 - non-veg }
+    made_in: india          //{optional}
+    total_allowed_quantity:100
+    minimum_order_quantity:12
+    quantity_step_size:1
+    warranty_period:1 month {optional}
+    guarantee_period:1 month {optional}
+    deliverable_type:1        //{0:none, 1:all, 2:include, 3:exclude}
+    deliverable_zipcodes:1,2,3  //{NULL: if deliverable_type = 0 or 1}
+    is_prices_inclusive_tax:0   //{1: inclusive | 0: exclusive}
+    cod_allowed:1               //{ 1:allowed | 0:not-allowed }
+    is_returnable:1             // { 1:returnable | 0:not-returnable } 
+    is_cancelable:1             //{1:cancelable | 0:not-cancelable}
+    cancelable_till:            //{received,processed,shipped}
+    pro_input_image:file  
+    other_images: files
+    video_type:                 // {values: vimeo | youtube}
+    video:                      //{URL of video}
+    pro_input_video: file
+    pro_input_description:product's description
+    category_id:99
+    attribute_values:1,2,3,4,5
+    status :1/0 {optional}
+    --------------------------------------------------------------------------------
+    till above same params
+    --------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------
+    common param for simple and variable product
+    --------------------------------------------------------------------------------          
+    product_type:simple_product | variable_product  
+    variant_stock_level_type:product_level | variable_level
+    
+    if(product_type == variable_product):
+        variants_ids:3 5,4 5,1 2
+        variant_price:100,200
+        variant_special_price:90,190
+        variant_images:files              //{optional}
+
+        sku_variant_type:test            //{if (variant_stock_level_type == product_level)}
+        total_stock_variant_type:100     //{if (variant_stock_level_type == product_level)}
+        variant_status:1                 //{if (variant_stock_level_type == product_level)}
+
+        variant_sku:test,test             //{if(variant_stock_level_type == variable_level)}
+        variant_total_stock:120,300       //{if(variant_stock_level_type == variable_level)}
+        variant_level_stock_status:1,1    //{if(variant_stock_level_type == variable_level)}
+
+    if(product_type == simple_product):
+        simple_product_stock_status:null|0|1   {1=in stock | 0=out stock}
+        simple_price:100
+        simple_special_price:90
+        product_sku:test
+        product_total_stock:100
+        variant_stock_status: 0            //{0 =>'Simple_Product_Stock_Active' 1 => "Product_Level" 2 => "Variable_Level"	}
+
+30. get_delivery_boys
+    seller_id:1255
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+31. register
+    name:test 
+    mobile:9874565478 
+    email:test@gmail.com
+    password:12345
+    confirm_password:12345
+    address:237,TimeSquare 
+    address_proof:FILE
+    national_identity_card:FILE
+    store_name:eshop store
+    store_logo:FILE
+    store_url:url
+    store_description:test
+    tax_name:GST
+    tax_number:GSTIN6786
+    pan_number:GNU876
+    account_number:123esdf
+    account_name:name
+    bank_code:INBsha23
+    bank_name:bank name
+
+32. upload_media
+    seller_id:1
+    documents[]:FILES
+
+33. get_product_rating 
+    product_id : 12
+    user_id : 1 	{optional} 
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: type   			// { default - type } optional
+    order:DESC/ASC          // { default - DESC } optional
+34. get_order_tracking
+    seller_id:1 
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
+35. edit_order_tracking
+    order_item_id:57 
+    courier_agency:asd agency
+    tracking_id:t_id123
+    url:http://test.com
+
+36.get_sales_list
+    seller_id:8
+    offset = 0,
+    limit = 10,
+    sort = " o.id ",
+    order = 'ASC',
+    start_date : 2020-09-07 or 2020/09/07 { optional }
+    end_date : 2021-03-15 or 2021/03/15 { optional }
+
+37.update_product_status
+    product_id:10
+    status:1     {1: active | 0: de-active}
+
+38. add_product_faqs
+    product_id:25   
+    seller_id:1      
+    question:test
+    answer : test // {optional}
+
+39. get_product_faqs
+    id:2    // {optional}
+    product_id:25   // {optional}
+    seller_id:1       // {optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 10 } optional
+    offset:0                // { default - 0 } optional
+    sort: id                // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+40. delete_product_faq
+    id:2
+    
+41. edit_product_faq
+    seller_id:2 
+    id:1
+    answer:test
+
+42. delete_seller
+    user_id:15
+    mobile:9874563214
+    password:12345695

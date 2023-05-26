@@ -1,0 +1,126 @@
+/*
+	WRTeam Developers
+*/
+
+API URL -->> 
+	https://vendor.eshopweb.store/delivery_boy/app/v1/api/{METHOD_NAME}  - (all APIs in one file only)
+
+---------------------------------------------------------------------------
+Defined API Methods:-
+---------------------------------------------------------------------------
+
+1. login
+2. get_delivery_boy_details
+3. get_orders
+4. get_fund_transfers
+5. update_user
+6. update_fcm
+7. reset_password
+8. get_notifications
+9. verify_user
+10. get_settings
+11. send_withdrawal_request
+12. get_withdrawal_request
+13. update_order_item_status
+14. get_delivery_boy_cash_collection
+15. delete_delivery_boy
+------------------------------------------
+What parameters to be Passed?  See here >>
+------------------------------------------
+
+
+Use POST method to pass the parameters
+
+1.login
+    mobile: 9874565478
+    password: 12345678
+    fcm_id: FCM_ID //{ optional } 
+
+2. get_delivery_boy_details
+    id:15
+
+3. get_orders
+    user_id:101
+    active_status: received  {received,delivered,cancelled,processed,returned}     // optional
+
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort: id / date_added // { default - id } optional
+    order:DESC/ASC      // { default - DESC } optional
+
+4. get_fund_transfers
+
+    user_id:101
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort: id / date_added // { default - id } optional
+    order:DESC/ASC      // { default - DESC } optional
+5. update_user
+    user_id:34
+    username:hiten
+    mobile:7852347890 {optional}
+    email:amangoswami@gmail.com	{optional}
+    //optional parameters
+    old:12345
+    new:345234
+
+6. update_fcm
+    user_id:12
+    fcm_id: FCM_ID
+
+7. reset_password
+    user_id:12
+    new: pass@123
+
+8. get_notifications
+    id:114
+    offset:0        // {optional}
+    limit:10        // {optional}
+
+    sort:id           // {optional}
+    order:DESC / ASC            // {optional}
+
+    search:search_value         // {optional}
+
+9. verify_user
+    mobile:1234567890
+    email:test@gmail.com // { optional }
+
+10. get_settings
+
+    type : delivery_boy_privacy_policy / delivery_boy_terms_conditions
+
+11. send_withdrawal_request
+
+    user_id:15
+    payment_address: 12343535
+    amount: 560
+
+12. get_withdrawal_request
+
+    user_id:15
+    limit:10
+    offset:10
+
+13. update_order_item_status
+
+    order_item_id:1
+    status : received / processed / shipped / delivered / cancelled / returned
+    delivery_boy_id: 15
+    otp:value      //{required when status is delivered}
+
+14. get_delivery_boy_cash_collection
+
+    delivery_boy_id:15  
+    status:             // {delivery_boy_cash (delivery boy collected) | delivery_boy_cash_collection (admin collected)}
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
+
+15. delete_delivery_boy
+
+    user_id:15
+    mobile:9874563214
+    password:12345695

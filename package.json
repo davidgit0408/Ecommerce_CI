@@ -1,0 +1,50 @@
+{
+  "name": "ex_gulp4",
+  "version": "0.0.0",
+  "description": "Gulp 4 Tutorial Exercise Files",
+  "scripts": {
+    "git:commit": "cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rapidevelop/ex_gulp4.git"
+  },
+  "keywords": [],
+  "author": "Iman Vafadarnezhad",
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/rapidevelop/ex_gulp4/issues"
+  },
+  "homepage": "https://github.com/rapidevelop/ex_gulp4#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@rapidevelop/prettier-config": "^1.0.1",
+    "autoprefixer": "^9.7.6",
+    "commitizen": "^4.2.3",
+    "cssnano": "^5.0.14",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
+    "gulp-uglify": "^3.0.2",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "browser-sync": "^2.27.7",
+    "clean-css": "^5.1.4",
+    "postcss": "^8.4.5"
+  }
+}
