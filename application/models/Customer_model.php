@@ -203,7 +203,7 @@ class Customer_model extends CI_Model
             $tempRow['id'] = $row['id'];
             $tempRow['delegate_name'] = $row['delegate_name'];
             $tempRow['customer_name'] = $row['customer_name'];
-            $tempRow['visiting_days'] = date("Y-m-d H:i:s", $row['visiting_days']);
+            $tempRow['visiting_days'] = $row['visiting_day'];
 
             $tempRow['operate'] = $operate;
             $rows[] = $tempRow;

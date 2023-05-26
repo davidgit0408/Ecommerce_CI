@@ -155,11 +155,11 @@ class Delegate extends CI_Controller
             $this->data['meta_description'] = 'Add Mission  | ' . $settings['app_name'];
             $this->data['delegates'] = $this->db->select(' u.username as delegate_name,u.id as delegate_id ')
                 ->join('users_groups ug', ' ug.user_id = u.id ')
-                ->where(['ug.group_id' => '2'])
+                ->where(['ug.group_id' => '5'])
                 ->get('users u')->result_array();
             $this->data['customers'] = $this->db->select(' u.username as customer_name,u.id as customer_id ')
                 ->join('users_groups ug', ' ug.user_id = u.id ')
-                ->where(['ug.group_id' => '4'])
+                ->where(['ug.group_id' => '2'])
                 ->get('users u')->result_array();
             $this->load->view('admin/template', $this->data);
         } else {
@@ -184,11 +184,15 @@ class Delegate extends CI_Controller
                 return false;
             }
 
+            $visiting_day_array = array(
+                0 => 'Saturday, Monday, Wednesday',
+                1 => 'Sunday, Tuesday, Thursday',
+            );
             $arr = $this->input->post(null, true);
             $mission_data = [
                 'delegate_id' => $arr['delegate_id'],
                 'customer_id' => $arr['customer_id'],
-                'visiting_day' => strtotime($arr['visiting_days'])
+                'visiting_day' => $visiting_day_array[$arr['visiting_day']]
             ];
 
             $this->db->insert('mission', $mission_data);

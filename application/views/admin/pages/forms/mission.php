@@ -38,7 +38,7 @@
                                     <div class="col-md-3">
                                         <label for="zipcode" class="col-form-label">Filter By Customer</label>
                                         <select class='form-control' name='customer_id' id="customer_id">
-                                            <option value="">Select Delegate </option>
+                                            <option value="">Select Customer </option>
                                             <?php foreach ($customers as $customer) { ?>
                                                 <option value="<?= $customer['customer_id'] ?>"><?= $customer['customer_name'] ?></option>
                                             <?php } ?>
@@ -46,7 +46,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="zipcode" class="col-form-label">Visiting Day</label>
-                                        <input type="datetime" name="visiting_day" id="visiting_day" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                                        <select class='form-control' name='visiting_day' id="visiting_day">
+                                            <option value="">Select Visiting Days </option>
+                                            <option value="0">Saturday, Monday, Wednesday</option>
+                                            <option value="1">Sunday, Tuesday, Thursday</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <br>
