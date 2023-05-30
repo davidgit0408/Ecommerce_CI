@@ -346,6 +346,41 @@ $('.add-to-fav-btn').on('click', function (e) {
     });
 });
 
+$('.add-to-fav-reel-btn').on('click', function (e) {
+    e.preventDefault();
+    var formdata = new FormData();
+    var reel_id = $(this).data('reel-id');
+    var fav_btn = $(this);
+    formdata.append(csrfName, csrfHash);
+    formdata.append('reel_id', reel_id);
+    $.ajax({
+        type: 'POST',
+        url: base_url + 'my-account/manage_favorites_reel',
+        data: formdata,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (result) {
+            csrfName = result.csrfName;
+            csrfHash = result.csrfHash;
+            if (result.error == true) {
+                Toast.fire({
+                    icon: 'error',
+                    title: result.message
+                });
+            } else {
+                if (fav_btn.hasClass('far')) {
+                    fav_btn.removeClass('far').addClass('fa text-danger');
+                } else {
+                    fav_btn.removeClass('fa text-danger').addClass('far');
+                    fav_btn.css('color', '#adadad');
+                }
+            }
+        }
+    });
+});
+
 $(document).on('click', '#add_to_favorite_btn', function (e) {
     e.preventDefault();
     var formdata = new FormData();

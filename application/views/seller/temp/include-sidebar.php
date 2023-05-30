@@ -77,6 +77,13 @@
         </li>
 
         <li class="menu-item">
+            <a href="<?= base_url('seller/reel/') ?>" class="menu-link">
+                <i class="menu-icon fas fa-video text-danger"></i>
+                <div data-i18n="Reels">Reels</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
             <a href="<?= base_url('seller/manage_stock') ?>" class="menu-link">
                 <i class="menu-icon fa fa-cube text-success"></i>
                 <div data-i18n="Manage Stock">Manage Stock</div>

@@ -343,7 +343,7 @@ $web_settings = get_settings('web_settings', true);
                                             <a href="<?= base_url('home/faq') ?>"><?= !empty($this->lang->line('faq')) ? $this->lang->line('faq') : 'FAQs' ?></a>
                                         </li>
                                         <li class="morph-text">
-                                            <a href="<?= base_url('blogs/') ?>"><?= !empty($this->lang->line('blogs')) ? $this->lang->line('blogs') : 'Blogs' ?></a>
+                                            <a href="<?= base_url('reels/') ?>">Reels</a>
                                         </li>
                                     </ul>
                                 </nav>

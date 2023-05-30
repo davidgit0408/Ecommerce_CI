@@ -1869,6 +1869,46 @@ $(document).on('click', '.delete-media', function () {
     });
 });
 
+$(document).on('click', '.delete-reel', function () {
+
+    var id = $(this).data('id');
+    var t = this;
+    Swal.fire({
+        title: 'Are You Sure!',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        showLoaderOnConfirm: true,
+        preConfirm: function () {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: base_url + from + '/reel/delete/' + id,
+                    dataType: 'json',
+                    success: function (result) {
+                        csrfName = result['csrfName'];
+                        csrfHash = result['csrfHash'];
+                        if (result['error'] == false) {
+                            $('table').bootstrapTable('refresh');
+                            Swal.fire('Success', 'File Deleted !', 'success');
+                        } else {
+                            Swal.fire('Oops...', result['message'], 'error');
+                        }
+                    }
+                });
+            });
+        },
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire('Cancelled!', 'Your data is  safe.', 'error');
+        }
+    });
+});
+
 
 
 $(document).on('focusout', '.discounted_price', function () {
@@ -4444,6 +4484,66 @@ if (document.getElementById('dropzone')) {
         };
     });
 }
+
+if (document.getElementById('dropzone_reel')) {
+
+    var myDropzone_reel = new Dropzone("#dropzone_reel", {
+        url: base_url + from + '/reel/upload',
+        paramName: "documents",
+        autoProcessQueue: false,
+        parallelUploads: 12,
+        maxFiles: 12,
+        autoDiscover: false,
+        addRemoveLinks: true,
+        timeout: 180000,
+        dictRemoveFile: 'x',
+        dictMaxFilesExceeded: 'Only 12 files can be uploaded at a time ',
+        dictResponseError: 'Error',
+        uploadMultiple: true,
+        dictDefaultMessage: '<p><input type="submit" value="Select Files" class="btn btn-success" /><br> or <br> Drag & Drop Media Files Here</p>',
+    });
+
+    myDropzone_reel.on("addedfile", function (file) {
+        var i = 0;
+        if (this.files.length) {
+            var _i, _len;
+            for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) {
+                if (this.files[_i].name === file.name && this.files[_i].size === file.size && this.files[_i].lastModifiedDate.toString() === file.lastModifiedDate.toString()) {
+                    this.removeFile(file);
+                    i++;
+                }
+            }
+        }
+    });
+
+    myDropzone_reel.on("error", function (file, response) { });
+
+
+    myDropzone_reel.on('sending', function (file, xhr, formData) {
+        formData.append(csrfName, csrfHash);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(this.response);
+                csrfName = response.csrfName;
+                csrfHash = response.csrfHash;
+                if (response['error'] == false) {
+                    Dropzone.forElement('#dropzone_reel').removeAllFiles(true);
+                    $("#media-upload-table").bootstrapTable('refresh');
+                    iziToast.success({
+                        message: response['message'],
+                    });
+                    $('#media-table').bootstrapTable('refresh');
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: response['message'],
+                    });
+                }
+                $(file.previewElement).find('.dz-error-message').text(response.message);
+            }
+        };
+    });
+}
 if (document.getElementById('system-update-dropzone')) {
 
     var systemDropzone = new Dropzone("#system-update-dropzone", {
@@ -4508,6 +4608,11 @@ if (document.getElementById('system-update-dropzone')) {
 $('#upload-files-btn').on('click', function (e) {
     e.preventDefault();
     myDropzone.processQueue();
+});
+
+$('#upload-files-btn-reel').on('click', function (e) {
+    e.preventDefault();
+    myDropzone_reel.processQueue();
 });
 
 

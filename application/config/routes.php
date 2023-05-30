@@ -59,6 +59,7 @@ $route['delivery-boy/(:any)/(:any)/(:any)/(:any)'] = "delivery_boy/$1/$2/$3/$4";
 $route['delivery-boy/(:any)/(:any)/(:any)/(:any)/(:any)'] = "delivery_boy/$1/$2/$3/$4/$5";
 $route['products/(:num)'] = "products/index/$1";
 $route['blogs/(:num)'] = "blogs/index/$1";
+$route['reels/(:num)'] = "reels/index/$1";
 $route['sellers/(:num)'] = "sellers/index/$1";
 $route['default_controller'] = 'home';
 $route['404_override'] = '';

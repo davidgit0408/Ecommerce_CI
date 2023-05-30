@@ -619,6 +619,41 @@ class My_account extends CI_Controller
         }
     }
 
+    public function manage_favorites_reel()
+    {
+        if ($this->data['is_logged_in']) {
+            $this->form_validation->set_rules('reel_id', 'Product Id', 'trim|numeric|required|xss_clean');
+            if (!$this->form_validation->run()) {
+                $this->response['error'] = true;
+                $this->response['message'] = validation_errors();
+                $this->response['data'] = array();
+            } else {
+                $data = [
+                    'user_id' => $this->data['user']->id,
+                    'reel_id' => $this->input->post('reel_id', true),
+                ];
+                if (is_exist($data, 'reel_favorites')) {
+                    $this->db->delete('reel_favorites', $data);
+                    $this->response['error']   = false;
+                    $this->response['message'] = "Reel removed from favorite !";
+                    print_r(json_encode($this->response));
+                    return false;
+                }
+                $data = escape_array($data);
+                $this->db->insert('reel_favorites', $data);
+                $this->response['error'] = false;
+                $this->response['message'] = 'Reel Added to favorite';
+                print_r(json_encode($this->response));
+                return false;
+            }
+        } else {
+            $this->response['error'] = true;
+            $this->response['message'] = "Login First to Add Reels in Favorite List.";
+            print_r(json_encode($this->response));
+            return false;
+        }
+    }
+
     public function get_transactions()
     {
         if ($this->ion_auth->logged_in()) {
