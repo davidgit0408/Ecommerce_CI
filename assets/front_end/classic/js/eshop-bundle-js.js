@@ -12870,6 +12870,25 @@ search_products.on("select2:select", function (t) {
             }) : i.hasClass("far") ? i.removeClass("far").addClass("fa text-danger") : (i.removeClass("fa text-danger").addClass("far"), i.css("color", "#adadad"))
         }
     })
+}), $(".add-to-fav-reel-btn").on("click", function (t) {
+    t.preventDefault();
+    var e = new FormData, t = $(this).data("reel-id"), i = $(this);
+    e.append(csrfName, csrfHash), e.append("reel_id", t), $.ajax({
+        type: "POST",
+        url: base_url + "my-account/manage-favorites-reel",
+        data: e,
+        cache: !1,
+        contentType: !1,
+        processData: !1,
+        dataType: "json",
+        success: function (t) {
+            window.location.reload();
+            csrfName = t.csrfName, csrfHash = t.csrfHash, 1 == t.error ? Toast.fire({
+                icon: "error",
+                title: t.message
+            }) : i.hasClass("far") ? i.removeClass("far").addClass("fa text-danger") : (i.removeClass("fa text-danger").addClass("far"), i.css("color", "#adadad"))
+        }
+    })
 }), $(document).on("click", "#add_to_favorite_btn", function (t) {
     t.preventDefault();
     var e = new FormData, t = $(this).data("product-id"), i = $(this), n = $(this).html();

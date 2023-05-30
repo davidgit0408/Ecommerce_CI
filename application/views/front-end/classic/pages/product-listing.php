@@ -147,7 +147,7 @@
                                     </div>
                                     <?php foreach ($products['product'] as $row) { ?>
                                        
-                                        <div class="col-md-3">
+                                        `<div class="col-md-3">
                                             <div class="product-grid">
                                                 <div class="product-image">
                                                     <div class="product-image-container">
@@ -178,7 +178,7 @@
                                                         </li>
                                                         <li>
                                                             <?php $variant_id = (count($row['variants']) <= 1) ? $row['variants'][0]['id'] : ""; ?>
-                                                        
+
                                                             <a href="#" class="compare" data-tip="Compare" data-product-id="<?= $row['id'] ?>" data-product-variant-id="<?= $variant_id ?>">
                                                                 <i class="fa fa-random"></i>
                                                             </a>
@@ -194,7 +194,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>`
                                         <div class="col-md-9">
                                             <div class="product-content">
                                                 <h2 class="list-product-title title"><a href="<?= base_url('products/details/' . $row['slug']) ?>"><?= $row['name'] ?></a></h2>

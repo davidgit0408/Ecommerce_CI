@@ -2711,6 +2711,18 @@ function allowed_media_types()
     return $general;
 }
 
+function allowed_reel_types()
+{
+    $t = &get_instance();
+    $t->config->load('eshop');
+    $type = $t->config->item('type');
+    $general = [];
+    foreach ($type as $main_type => $extenstions) {
+        $general = array_merge_recursive($general, $extenstions['types']);
+    }
+    return $general;
+}
+
 function get_current_version()
 {
     $t = &get_instance();

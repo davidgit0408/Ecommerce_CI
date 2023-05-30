@@ -158,6 +158,15 @@
             </li>
         <?php } ?>
 
+        <?php if (has_permissions('read', 'reels')) { ?>
+            <li class="menu-item">
+                <a href="<?= base_url('admin/reel/') ?>" class="menu-link">
+                    <i class="menu-icon fas fa-video text-danger"></i>
+                    <div data-i18n="Reels">Reels</div>
+                </a>
+            </li>
+        <?php } ?>
+
         <?php if (has_permissions('read', 'product') || has_permissions('read', 'attribute') || has_permissions('read', 'attribute_set') || has_permissions('read', 'attribute_value') || has_permissions('read', 'tax') || has_permissions('read', 'product_order')) { ?>
             <li class="menu-item ">
                 <a href="#" class="menu-link menu-toggle">
