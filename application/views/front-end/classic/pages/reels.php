@@ -66,7 +66,6 @@
                                         </aside>
                                     </div>
                                     <div class="product-content">
-                                        <h3 class="title" style="font-size: 1.5rem; font-weight: 700;"><?= $row['title'] ?></h3>
                                         <div class="price">
                                             <a class="add-to-cart view-products" href="<?= base_url('download/download_reel/') . $row['id'] ?>">Download Reel</a>
                                             <i class="menu-icon fas fa-star text-danger"></i>

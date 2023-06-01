@@ -80,6 +80,7 @@
                                                 <th data-field="state" data-checkbox="true"></th>
                                                 <th data-field="id" data-sortable="true" data-visible='false' data-align='center'>ID</th>
                                                 <th data-field="seller_id" data-sortable="true" data-visible='false' data-align='center'>Seller ID</th>
+                                                <th data-field="seller_name" data-sortable="true" data-align='center'>Seller Name</th>
                                                 <th data-field="name" data-sortable="false" data-align='center'>Name</th>
                                                 <th data-field="image" data-sortable="false" data-align='center'>Image</th>
                                                 <th data-field="extension" data-sortable="false" data-align='center'>Extension</th>

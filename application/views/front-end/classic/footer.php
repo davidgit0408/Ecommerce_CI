@@ -357,7 +357,6 @@
 
 <?php if (ALLOW_MODIFICATION == 0) { ?>
     <div class="buy-now-btn">
-        <a href="https://codecanyon.net/item/eshop-web-multi-vendor-ecommerce-marketplace-cms/34380052" target="_blank" class="btn btn-danger"> <i class="fa fa-shopping-cart"></i> <?= !empty($this->lang->line('buy_now')) ? $this->lang->line('buy_now') : 'Buy Now' ?></a>
     </div>
 <?php } ?>
 

@@ -1,6 +1,5 @@
 <?php if (ALLOW_MODIFICATION == 0) { ?>
     <div class="alert alert-warning">
-        Note: If you cannot login here, please close the codecanyon frame by clicking on x Remove Frame button from top right corner on the page or <a href="<?= base_url('/admin') ?>" target="_blank" class="text-danger">>> Click here <<< /a>
     </div>
 <?php } ?>
 <div class="login-box">

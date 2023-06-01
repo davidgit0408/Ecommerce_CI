@@ -70,8 +70,10 @@ class Reel_model extends CI_Model
                 $type = explode(",", $this->input->get('type'));
                 $where_in = $type;
             }
-            if (isset($this->ion_auth->user()->row()->id) && $this->ion_auth->user()->row()->id != null) {
-                $where['seller_id'] = $this->ion_auth->user()->row()->id;
+            if (!$this->ion_auth->is_admin()) {
+                if (isset($this->ion_auth->user()->row()->id) && $this->ion_auth->user()->row()->id != null && !$this->ion_auth->is_admin()) {
+                    $where['seller_id'] = $this->ion_auth->user()->row()->id;
+                }
             }
             $count_res = $this->db->select(' COUNT(id) as `total` ');
 
@@ -152,6 +154,12 @@ class Reel_model extends CI_Model
 
 
                 $favorites = $this->db->select(' COUNT(id) as `total_favorites` ')->where(array('reel_id' => $row['id']))->get(' reel_favorites ')->result_array();
+                if ( !$this->ion_auth->is_admin() ) {
+                    $seller = $this->db->select('username')->where('id', $row['seller_id'])->get('users')->result_array();
+                    $tempRow['seller_name'] = $seller[0]['username'];
+                } else {
+                    $tempRow['seller_name'] = 'admin';
+                }
                 $tempRow['favorites_count'] = $favorites[0]['total_favorites'];
                 $tempRow['extension'] = $row['extension'];
                 $tempRow['seller_id'] = $row['seller_id'];
@@ -220,7 +228,7 @@ class Reel_model extends CI_Model
             $search_res->where_in("type", $where_in);
         }
 
-        $city_search_res = $search_res->order_by($sort, $order)->limit($limit, $offset)->get('reel')->result_array();
+        $city_search_res = $search_res->limit($limit, $offset)->get('reel')->result_array();
         $bulkData = array();
         $bulkData['error'] = (empty($city_search_res)) ? true : false;
         $bulkData['message'] = (empty($city_search_res)) ? 'Reel(s) does not exist' : 'Reel retrieved successfully';
